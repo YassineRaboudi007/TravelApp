@@ -3,6 +3,7 @@ using TravelApp.Controllers.FlightController;
 using TravelApp.Controllers.HotelController.Dtos;
 using TravelApp.Flight.FlightsQuery;
 using TravelApp.Hotels.HotelsQuery;
+using TravelApp.Shared;
 
 namespace TravelApp.Controllers.HotelController
 {
@@ -21,6 +22,8 @@ namespace TravelApp.Controllers.HotelController
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(SimplifiedHotelInfo))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<BaseError>))]
         public async Task<IActionResult> GetHotelsPerRegion(
         [FromQuery] string AirportZone,
         [FromQuery] DateTime CheckIn,

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TravelApp.Controllers.FlightController.Dtos;
 using TravelApp.Flight.FlightsQuery;
+using TravelApp.Hotels.HotelsQuery;
 using TravelApp.Shared;
 
 namespace TravelApp.Controllers.FlightController
@@ -18,7 +19,9 @@ namespace TravelApp.Controllers.FlightController
             _flightsQueryService = flightsQueryService;
         }
 
-        [HttpGet()]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<FlightsQueryResponse>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<BaseError>))]
         public async Task<IActionResult> GetFlights(
         [FromQuery] string origin,
         [FromQuery] string destination,
